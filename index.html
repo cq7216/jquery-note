@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="css/reset.css" />
+        <script type="text/javascript" src="js/jquery_1.8.2.js"></script>
+        <title>Html5模板</title>
+    </head>
+    <body>
+        <!-- 点击按钮，让隐藏的DIV显示出来 -->
+        <h3>实例一：点击按钮，让隐藏的DIV显示出来</h3>
+        <style type="text/css">
+            #no1{display:none;width:120px;height:50px;border:1px solid blue;}
+        </style>
+        <div id="no1">Hello iMooc!</div>
+        <button onclick="func1()">点我让隐藏的DIV显示出来！</button>
+        <script type="text/javascript">
+            function func1(){
+                $("#no1").show();
+            }
+        </script>
+        <hr> 
+        <!-- 点击按钮，更改div中的html内容 -->
+        <h3>实例二：点击按钮，更改div中的html内容</h3>
+        <div class="no2">default content</div>
+        <button onclick="func2()">点我更改div中的html内容！</button>
+        <script type="text/javascript">
+        function func2(){
+            $('.no2').html("Hello iMooc!");
+        }
+        </script>
+        <hr>
+        <!-- 实例三：使用attr()方法控制元素的属性 -->
+        <h3>实例三：使用attr()方法控制元素的属性</h3>
+        <p>说明：attr()方法的作用是设置或者返回元素的属性，其中attr(属性名)格式是获取元素属性名的值，attr(属性名，属性值)格式则是设置元素属性名的值。</p>
+        <a href="http://127.0.0.1" id="no3">这是一个链接</a>
+        <div>链接的地址是：<span id="no3tip"></span></div>
+        <button onclick="func3()">点我显示链接地址！</button>
+        <script type="text/javascript">
+        var $url=$('#no3').attr('href');
+        function func3(){
+            $('#no3tip').html($url);
+        }
+        </script>
+        <hr>
+        <!-- 实例四： -->
+        <h3>实例四：bind()方法绑多个事件</h3>
+        <input id="btnno4" type="button" value="点击或移出就不可用了" />
+        <script type="text/javascript">
+            $(function () {
+                $('#btnno4').bind('click mouseout',function () {
+                    $(this).attr("disabled", "true");
+                });
+            });
+        </script>
+        <hr>
+        <!-- 实例五：hover()方法切换事件 -->
+        <h3>实例五：hover()方法切换事件</h3>
+        <div id="no5">别走！你就是土豪</div>
+        <style type="text/css">
+        .orange {background-color: Orange; color:White; }
+        #no5{ width: 160px; border: solid 1px #ccc; padding:8px; text-align:center;} 
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $('#no5').hover(
+                function () {
+                    $(this).addClass("orange");
+                },
+                function () {
+                    $(this).removeClass("orange")
+                })
+            });
+        </script>
+        <hr>
+        <!-- 实例六：toggle()方法绑定多个函数 -->
+         <h3>实例六：toggle()方法绑定多个函数</h3>
+        <input id="btnno6" type="button" value="点一下我" />
+        <div id="no6">我是动态显示的</div>
+        <br>
+        <input id="btnno6_2" type="button" value="点一下我" />
+        <div id="no6_2">我是动态显示的</div>
+        <style type="text/css">
+        #no6{   width: 160px; border: solid 1px #ccc; padding:8px; text-align:center; background-color:Orange; color:White;}
+        #no6_2{   width: 160px; border: solid 1px #ccc; padding:8px; text-align:center; background-color:Orange; color:White;}
+        </style>
+        <script type="text/javascript">
+            $(function (){
+                $("#btnno6").toggle(function(){
+                    $("#no6").hide();},
+                    function(){$("#no6").show();}
+                    )
+            });
+            $(function () {
+                $("#btnno6_2").bind("click", function () {
+                    $("#no6_2").toggle();
+                })
+            });
+        </script>
+        <hr>
+        <!-- 实例七：文本框的focus和blur事件 -->
+        <h3>实例七：表单中文本框的focus和blur事件</h3>
+        <input id="txno7" type="text" value="" />
+        <div id="no7"></div>
+        
+        <script type="text/javascript">
+            $(function () {
+                $("#txno7")
+                .bind("focus", function () {
+                    $("#no7").html("请输入您的姓名！");
+                })
+                .bind("blur", function () {
+                    if ($(this).val().length == 0)
+                        $("#no7").html("你的名称不能为空！");
+                })
+            });
+        </script>
+        <hr>
+        <!-- 案例八：下拉列表框的change事件 -->
+        <h3>案例八：下拉列表的change事件</h3>
+        <select id="seltest">
+            <option value="葡萄">葡萄</option>
+            <option value="苹果">苹果</option>
+            <option value="荔枝">荔枝</option>
+            <option value="香焦">香焦</option>
+        </select>
+        
+        <script type="text/javascript">
+            $(function () {
+                $('select').bind('change', function () {
+                    if ($(this).val() == "苹果")
+                        $(this).css("background-color", "red");
+                    else
+                        $(this).css("background-color", "green");
+                })
+            });
+        </script>
+        <hr>
+        <!-- 案列九：使用show()和hide()方法显示和隐藏元素 -->
+        <h3>案列九：使用show()和hide()方法显示和隐藏元素</h3>
+        <div id="div9">
+            <h4 id="h9">我喜欢吃的水果(点我)</h4>
+            <ul id="no9">
+                <li>苹果</li>
+                <li>甘桔</li>
+                <li>梨</li>
+            </ul>
+            <input id="hidval" type="hidden" value="0"/>
+        </div>
+        <style type="text/css">
+        #div9{margin: 10px 0px; border: solid 1px #ccc; width: 280px; }
+        #h9{background-color: #eee; padding: 5px; margin: 0px; height: 23px; line-height: 23px; }
+        #no9{padding: 5px; margin: 0px; display: none; }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $("#h9").bind("click", function () {
+                    if ($("#hidval").val() == 0) {
+                        $('#no9').show(300);
+                        $("#hidval").val(1);
+                    } else {
+                        $('#no9').hide(300);
+                        $("#hidval").val(0);
+                    }
+                });
+            });
+        </script>
+        <hr>
+        <!-- 案例十：toggle()方法的动画切换效果 -->
+        <h3>案例十：toggle()方法的动画切换效果</h3>
+        <div id="div10">
+            <h4 id="h10">
+               <span class="fl">我喜欢吃的水果</span>
+               <span class="fr" id="spnTip">显示</span>
+            </h4>
+            <ul id="no10">
+                <li>苹果</li>
+                <li>甘桔</li>
+                <li>梨</li>
+            </ul>
+        </div>
+        <style type="text/css">
+        #div10{margin: 10px 0px; border: solid 1px #ccc; width: 280px; }
+        #h10 {background-color: #eee; padding: 5px; margin: 0px; height: 23px; line-height: 23px; }
+        #no10{padding: 5px; margin: 0px; display: none; }
+        </style>
+        
+        <script type="text/javascript">
+            $(function () {
+                var $spn = $("#spnTip");
+                $("#h10").bind("click", function () {
+                    $('#no10').toggle(300,function(){
+                     $spn.html() == "隐藏" ? $spn.html("显示") : $spn.html("隐藏");
+                    })
+                });
+            });
+        </script>
+        <!-- 案例十一：使用slideUp()和slideDown()方法的滑动效果 -->
+        <h3>案例十一：使用slideUp()和slideDown()方法的滑动效果</h3>
+         <h3>使用slideUp()和slideDown()方法的滑动效果</h3>
+        <div id="div11">
+            <h4 id="h11">我喜欢吃的水果</h4>
+            <ul id="u11">
+                <li>苹果</li>
+                <li>甘桔</li>
+                <li>梨</li>
+            </ul>
+            <input id="no11" type="hidden" value="0"/>
+        </div>
+        <style type="text/css">
+        #div11{margin: 10px 0px; border: solid 1px #ccc; width: 280px; }
+        #h11 {background-color: #eee; padding: 5px; margin: 0px; height: 23px; line-height: 23px; }
+        #no11{padding: 5px; margin: 0px; display: none; }
+        </style>
+        <script type="text/javascript">
+            $(function () {
+                $("#h11").bind("click", function () {
+                    if ($("#no11").val() == 0) {
+                        $('ul#u11').slideUp(300,function() {
+                            $("#no11").val(1);
+                        })
+                    } else {
+                        $('ul#u11').slideDown(300,function(){
+                            $("#no11").val(0);
+                        })
+                    }
+                })
+            });
+        </script>
+    </body>
+</html>
